@@ -1,0 +1,32 @@
+#root {
+  background-color: black;
+}
+body {
+  overflow-x: hidden;
+}
+
+.mainIcon {
+  color: "aliceblue";
+  animation: mainIcon-spin 1s infinite;
+  animation-timing-function: linear;
+  display: inline-block;
+}
+.mainIcon:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.mainIcon.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+@keyframes mainIcon-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .mainIcon {
+    animation: mainIcon-spin infinite 20s linear;
+  }
+}

@@ -1,0 +1,12 @@
+.pagination-btn {
+  color: rgb(38, 152, 156);
+  background-color: black !important;
+  padding: 0.25rem;
+  text-decoration: none;
+}
+.leftMargin2{
+  margin-left: 2rem;
+}
+.rightMargin2 {
+  margin-right: 2rem;
+}
