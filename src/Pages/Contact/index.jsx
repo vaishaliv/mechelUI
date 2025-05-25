@@ -232,12 +232,9 @@ const Contact = () => {
       }}
     >
       <CommonHeader title="contact us" />
-      {/* <UserData setFormData={setFormData} /> */}
       <Container className=" w-100">
         <Row>
-          <Col 
-          //className="w-100"
-          >
+          <Col>
             <FormComp />
           </Col>
           <Col>
@@ -246,9 +243,7 @@ const Contact = () => {
           </Col>
         </Row>
       </Container>
-      <Container>
-        <Contacts data={formData} />
-      </Container>
+
       <Map />
     </div>
   );
