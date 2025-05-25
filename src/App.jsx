@@ -18,8 +18,11 @@ function App() {
     >
       <BrowserRouter>
         <>
+        <div className="fixed-top">
+
           <TopBanner />
           <NavBarComp />
+        </div>
 
           <Routes>
             <Route path="/" element={<Home />} />
