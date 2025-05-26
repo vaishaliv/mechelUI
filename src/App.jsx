@@ -44,15 +44,15 @@ function App() {
   });
 
   useEffect(() => {
-    const handleResizeWindow = () => setWidth(window.innerWidth);
-    const smallScreen = window.innerWidth < breakpoint;
-    setScreenFlag({ width: window.innerWidth, breakpoint });
-    // subscribe to window resize event "onComponentDidMount"
-    window.addEventListener("resize", handleResizeWindow);
-    return () => {
-      // unsubscribe "onComponentDestroy"
-      window.removeEventListener("resize", handleResizeWindow);
-    };
+    // const handleResizeWindow = () => setWidth(window.innerWidth);
+    // const smallScreen = window.innerWidth < breakpoint;
+    // setScreenFlag({ width: window.innerWidth, breakpoint });
+    // // subscribe to window resize event "onComponentDidMount"
+    // window.addEventListener("resize", handleResizeWindow);
+    // return () => {
+    //   // unsubscribe "onComponentDestroy"
+    //   window.removeEventListener("resize", handleResizeWindow);
+    // };
 
     if (user) {
       axios
