@@ -51,7 +51,7 @@ const About = () => {
           overflowY: "hidden",
         }}
       >
-        <CommonHeader title="About us" />
+        <CommonHeader title="About us" topMargin="7rem" />
         {PageData.map((data, i) => (
           <Row xs={1} md={2} className="g-4" key={data.id}>
             <Col className="w-100 mb-5" key={data.id}>
@@ -59,7 +59,11 @@ const About = () => {
                 <Row className="h-100">
                   {data.id !== 2 && (
                     <Col>
-                      <Card.Img variant="top" src={data.img} style={{height:'60vh'}} />
+                      <Card.Img
+                        variant="top"
+                        src={data.img}
+                        style={{ height: "60vh" }}
+                      />
                     </Col>
                   )}
                   <Col>
@@ -70,7 +74,11 @@ const About = () => {
                   </Col>
                   {data.id === 2 && (
                     <Col>
-                      <Card.Img variant="top" src={data.img} style={{height:'60vh'}}/>
+                      <Card.Img
+                        variant="top"
+                        src={data.img}
+                        style={{ height: "60vh" }}
+                      />
                     </Col>
                   )}
                 </Row>
@@ -93,7 +101,7 @@ const About = () => {
         <CommonHeader title="About us" />
         {PageData.map((data, i) => (
           <Card className="mb-5" style={{ width: "18rem" }}>
-            <Card.Img variant="top" src={data.img} style={{height:'40vh'}}/>
+            <Card.Img variant="top" src={data.img} style={{ height: "40vh" }} />
             <Card.Body>
               <Card.Title>{data.title}</Card.Title>
               <Card.Text>{data.body}</Card.Text>

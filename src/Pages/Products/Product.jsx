@@ -1,7 +1,6 @@
 import React from "react";
 import { Button, Card, Col, Container, Image, Row } from "react-bootstrap";
 import CommonHeader from "../../components/common/CommonHeader";
-// import CommonHeader from "../common/CommonHeader";
 
 const Product = ({
   len,
@@ -89,7 +88,7 @@ const Product = ({
               marginTop: "3rem",
             }}
           >
-            <CommonHeader title={data.title} />
+            <CommonHeader title={data.title} topMargin="7rem"  />
 
             <Card.Title
               className="text-center p-2"

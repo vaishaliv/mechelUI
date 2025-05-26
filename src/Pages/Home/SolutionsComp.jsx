@@ -48,8 +48,8 @@ const CardData = [
 const SolutionsComp = () => {
   return (
     <div>
-      <div className="mt-5">
-        <CommonHeader title="Solutions" />
+      <div className="">
+        <CommonHeader title="Solutions" topMargin="1rem" />
       </div>
       <Row
         className="m-3"
@@ -58,7 +58,6 @@ const SolutionsComp = () => {
         lg={3}
         style={{
           display: "flex",
-          // height: "100vh",
         }}
       >
         {CardData.map((data, i) => (

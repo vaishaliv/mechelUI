@@ -31,9 +31,9 @@ const CardMain = () => {
               style={{
                 color: "aliceblue",
                 position: "absolute",
-                top: "14%",
-                right: "5%",
-                fontWeight: "lighter",
+                top: "20%",
+                right: "80%",
+                fontWeight: "bold",
               }}
             >
               9769909978 / 9892377086

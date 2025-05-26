@@ -27,25 +27,15 @@ const PageData = [
 
 const Photos = () => {
   return (
-    // <div
-    // style={{ backgroundColor: "black", overflowX:'hidden', overflowY:'hidden' }}
-    // >
-
     <Container
       style={{
         backgroundColor: "black",
-        // overflowX: "hidden",
-        // overflowY: "hidden",
-        // height:'100vh'
         minHeight: "100vh",
       }}
     >
-      <Stack
-        gap={2}
-        // className="col-md-5 mx-auto"
-      >
+      <Stack gap={2}>
         <div className="mt-5">
-          <CommonHeader title="Our Photo Gallery" />
+          <CommonHeader title="Our Photo Gallery" topMargin="7rem" />
         </div>
         <Container>
           <Carousel>
@@ -78,7 +68,6 @@ const Photos = () => {
         </Container>
       </Stack>
     </Container>
-    // </div>
   );
 };
 

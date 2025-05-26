@@ -35,8 +35,7 @@ const Contact = () => {
       createdDate: "",
     },
   ]);
-  // const [email, setEmail] = useState("");
-  // const [msg, setMsg] = useState("");
+
   const nameRef = useRef(null);
   const emailRef = useRef(null);
   const msgRef = useRef(null);
@@ -96,7 +95,6 @@ const Contact = () => {
           backgroundColor: "black",
           color: "aliceblue",
           padding: "1rem",
-          // margin: "1rem",
         }}
       >
         <Card.Body>
@@ -219,7 +217,6 @@ const Contact = () => {
     );
   };
 
-  // console.log("FormData state", formData);
   return (
     <div
       style={{
@@ -227,11 +224,9 @@ const Contact = () => {
         backgroundColor: "black",
         height: "auto",
         width: "auto",
-        // overflowX: "hidden",
-        // overflowY: "hidden",
       }}
     >
-      <CommonHeader title="contact us" />
+      <CommonHeader title="contact us" topMargin="1rem" innerMargin="2rem" />
       <Container className=" w-100">
         <Row>
           <Col>
