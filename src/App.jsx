@@ -13,27 +13,15 @@ import Contact from "./Pages/Contact";
 import Products from "./Pages/Products";
 import Photos from "./Pages/Photos";
 import CommonFooter from "./components/common/CommonFooter";
+
 const breakpoint = 700;
 
 // const API_KEY = import.meta.env.VITE_API_KEY;
 
-
 function App() {
-  const CLIENT_KEY = import.meta.env.VITE_CLIENT_ID
+  // const CLIENT_KEY = import.meta.env.VITE_CLIENT_ID
   const [width, setWidth] = React.useState(window.innerWidth);
   const [isSmallScreen, setScreenFlag] = useState({ width: "", breakpoint });
-
-  // React.useEffect(() => {
-  //   const handleResizeWindow = () => setWidth(window.innerWidth);
-  //   const smallScreen = window.innerWidth < breakpoint;
-  //   setScreenFlag({ width: window.innerWidth, breakpoint });
-  //   // subscribe to window resize event "onComponentDidMount"
-  //   window.addEventListener("resize", handleResizeWindow);
-  //   return () => {
-  //     // unsubscribe "onComponentDestroy"
-  //     window.removeEventListener("resize", handleResizeWindow);
-  //   };
-  // }, []);
 
   const [user, setUser] = useState([]);
   const [profile, setProfile] = useState([]);
@@ -44,17 +32,7 @@ function App() {
   });
 
   useEffect(() => {
-    // const handleResizeWindow = () => setWidth(window.innerWidth);
-    // const smallScreen = window.innerWidth < breakpoint;
-    // setScreenFlag({ width: window.innerWidth, breakpoint });
-    // // subscribe to window resize event "onComponentDidMount"
-    // window.addEventListener("resize", handleResizeWindow);
-    // return () => {
-    //   // unsubscribe "onComponentDestroy"
-    //   window.removeEventListener("resize", handleResizeWindow);
-    // };
-
-    if (user) {
+    if (user && user.access_token) {
       axios
         .get(
           `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
@@ -71,6 +49,11 @@ function App() {
         })
         .catch((err) => console.log(err));
     }
+
+    return () => {
+      // unsubscribe "onComponentDestroy"
+      logOut();
+    };
   }, [user]);
 
   const logOut = () => {
@@ -78,7 +61,6 @@ function App() {
     setProfile(null);
   };
 
-  console.log("Appppppppppppppppppp", CLIENT_KEY)
   return (
     <ThemeProvider
       breakpoints={["xxxl", "xxl", "xl", "lg", "md", "sm", "xs", "xxs"]}
@@ -88,9 +70,9 @@ function App() {
         <>
           <div className="fixed-top">
             <TopBanner />
-            <NavBarComp 
+            <NavBarComp
             // isSmallScreen={isSmallScreen}
-             />
+            />
           </div>
 
           <Routes>

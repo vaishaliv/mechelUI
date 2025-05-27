@@ -74,7 +74,7 @@ const NavBarComp = () => {
       //fixed-top"
       >
         <Container>
-          <Navbar.Brand className="mx-3" href="/home">
+          <Navbar.Brand className="mx-3" href="/">
             <img
               src={logo}
               alt="logo"

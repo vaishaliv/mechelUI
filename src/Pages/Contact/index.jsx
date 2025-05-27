@@ -12,6 +12,7 @@ import CommonHeader from "../../components/common/CommonHeader";
 import Map from "./Map";
 // import UserData from "./UserData";
 import Contacts from "./Contacts";
+import CustomEmail from "../../components/common/CustomEmail";
 
 const PageData = [
   {
@@ -37,6 +38,7 @@ const Contact = () => {
   ]);
 
   const nameRef = useRef(null);
+  const phoneRef = useRef(null);
   const emailRef = useRef(null);
   const msgRef = useRef(null);
 
@@ -107,25 +109,29 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const date = new Date();
 
     // Accessing the values of the input fields using useRef
     const name = nameRef.current.value;
+    const phone = phoneRef.current.value;
     const email = emailRef.current.value;
     const msg = msgRef.current.value;
+    const createdDate = date.toLocaleString();
 
+    CustomEmail({ name, phone, email, msg, createdDate });
     // localStorage.setItem("Users",[{id:1,name,email,msg}])
 
     const data = localStorage.getItem("Users");
-    const date = new Date();
-    const display1 = JSON.parse(data);
+    // const display1 = JSON.parse(data);
     const newItem = {
-      id: display1 && display1.length,
+      // id: display1 && display1.length,
       name,
       email,
       msg,
       createdDate: date.toLocaleString(),
     };
-    const sampleData = [...display1, newItem];
+    let sampleData = [];
+    // const sampleData = [...display1, newItem];
     setFormData([...formData, newItem]);
     // setItems([...items, newItem]);
     localStorage.setItem("Users", JSON.stringify(sampleData)); // Save data
@@ -138,9 +144,9 @@ const Contact = () => {
     </Alert>;
 
     // Optionally, clear the input fields
-    nameRef.current.value = "";
-    emailRef.current.value = "";
-    msgRef.current.value = "";
+    // nameRef.current.value = "";
+    // emailRef.current.value = "";
+    // msgRef.current.value = "";
     nameRef.current.focus();
   };
 
@@ -168,6 +174,19 @@ const Contact = () => {
                   border: "0.1px solid #191414",
                 }}
                 placeholder="Name *"
+                type="text"
+              />
+            </Row>
+            <Row className="mb-3">
+              <Form.Control
+                required
+                ref={phoneRef}
+                name="phone"
+                className="mb-2"
+                style={{
+                  border: "0.1px solid #191414",
+                }}
+                placeholder="Phone *"
                 type="text"
               />
             </Row>
@@ -238,6 +257,9 @@ const Contact = () => {
           </Col>
         </Row>
       </Container>
+
+      
+
 
       <Map />
     </div>
