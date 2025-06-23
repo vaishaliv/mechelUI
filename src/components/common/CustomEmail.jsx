@@ -25,7 +25,7 @@ const CustomEmail = (details) => {
         message: details.msg,
         time: details.createdDate,
         from_name: "Vijay",
-        from_email:'vijay.girish.viragi@gmail.com',
+        from_email: "vijay.girish.viragi@gmail.com",
         title: "New Customer Registered",
       },
       "tjehOi2vZ5_rzFRj8"

@@ -13,6 +13,8 @@ import Map from "./Map";
 // import UserData from "./UserData";
 import Contacts from "./Contacts";
 import CustomEmail from "../../components/common/CustomEmail";
+import CountdownTimer from "./CountdownTimer";
+import DatePickerComp from "../../components/common/DatePickerComp";
 
 const PageData = [
   {
@@ -37,6 +39,8 @@ const Contact = () => {
     },
   ]);
 
+  const [showReminder, setShowReminder] = useState(false);
+  const [reminderCount, setReminderCount] = useState(null);
   const nameRef = useRef(null);
   const phoneRef = useRef(null);
   const emailRef = useRef(null);
@@ -46,6 +50,10 @@ const Contact = () => {
     nameRef.current?.focus();
   }, []);
 
+  useEffect(() => {}, []);
+
+  const handleReminderClose = () => setShowReminder(false);
+  const handleReminderOpen = () => setShowReminder(true);
   const BottomCardInfo = () => {
     return (
       <Card
@@ -121,8 +129,46 @@ const Contact = () => {
     CustomEmail({ name, phone, email, msg, createdDate });
     // localStorage.setItem("Users",[{id:1,name,email,msg}])
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // llllllllllllllllllllllllllllllll1
     const data = localStorage.getItem("Users");
-    // const display1 = JSON.parse(data);
+    const loginUser = JSON.parse(data);
+    // lllllllllllllllllllllllllllllllll
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     const newItem = {
       // id: display1 && display1.length,
       name,
@@ -149,6 +195,7 @@ const Contact = () => {
     // msgRef.current.value = "";
     nameRef.current.focus();
   };
+  const today = new Date();
 
   const FormComp = () => {
     return (
@@ -157,8 +204,6 @@ const Contact = () => {
           border: "0.1px solid #191414",
           backgroundColor: "black",
           color: "aliceblue",
-          // padding: "1rem",
-          // margin: "1rem",
         }}
       >
         <Card.Body>
@@ -256,10 +301,11 @@ const Contact = () => {
             <BottomCardInfo />
           </Col>
         </Row>
+        <hr/>
+        <Row>
+          <Contacts />
+        </Row>
       </Container>
-
-      
-
 
       <Map />
     </div>

@@ -57,7 +57,7 @@ const Product = ({
             style={{
               color: "rgb(38, 152, 156)",
               backgroundColor: "black",
-              marginTop:'0.3rem'
+              marginTop: "0.3rem",
             }}
           >
             {selectedSubIndex + " / " + data.pdf.length}
@@ -88,7 +88,7 @@ const Product = ({
               marginTop: "3rem",
             }}
           >
-            <CommonHeader title={data.title} topMargin="7rem"  />
+            <CommonHeader title={data.title} topMargin="7rem" />
 
             <Card.Title
               className="text-center p-2"

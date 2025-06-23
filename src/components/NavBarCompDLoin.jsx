@@ -10,19 +10,95 @@ import {
   Stack,
   Spinner,
 } from "react-bootstrap";
-// import { GoogleLogin, googleLogout, useGoogleLogin } from "@react-oauth/google";
+import { GoogleLogin, googleLogout, useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import pic from "../assets/logo.svg";
 import logo from "../assets/logo.webp";
 import { Link } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { BiLogOut } from "react-icons/bi";
-import UserContext from "../Contexts/UserContext";
 const breakpoint = 700;
 
 const NavBarComp = () => {
+  const [user, setUser] = useState([]);
+  const [isLoading, setLoading] = useState(false);
   const [width, setWidth] = useState(window.innerWidth);
   const [isSmallScreen, setScreenFlag] = useState({ width: "", breakpoint });
+  const [userProfile, setProfile] = useState(null);
+
+  const CLIENT_KEY = import.meta.env.VITE_CLIENT_ID;
+
+  useEffect(() => {
+    setLoading(true);
+    if (user) {
+      axios
+        .get(
+          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
+          {
+            headers: {
+              Authorization: `Bearer ${user.access_token}`,
+              Accept: "application/json",
+            },
+          }
+        )
+        .then((res) => {
+          localStorage.setItem("USER-PROFILE", JSON.stringify(res.data)); // Save data
+          setProfile(res.data);
+        })
+        .catch((err) => console.log(err))
+        .finally(() => {
+          setLoading(false);
+        });
+    }
+    return () => setLoading(false);
+  }, [user]);
+
+  // -----------------------------------------
+  const useGoogleScript = (clientId, redirectUri, callback) => {
+    useEffect(() => {
+      const scriptId = "google-client-script";
+      if (!document.getElementById(scriptId)) {
+        const script = document.createElement("script");
+        script.src = "https://accounts.google.com/gsi/client";
+        script.async = true;
+        script.defer = true;
+        script.id = scriptId;
+
+        script.onload = () => {
+          window.google.accounts.id.initialize({
+            client_id: clientId,
+            callback: callback,
+            redirect_uri: redirectUri,
+          });
+        };
+        document.body.appendChild(script);
+      }
+    }, [clientId, redirectUri, callback]);
+  };
+
+  const handleCredentialResponse = (response) => {
+    if (response?.credential) {
+      console.log("response.credential", response.credential);
+    } else {
+      console.log("failed");
+    }
+  };
+
+  const clientId = CLIENT_KEY;
+  const redirectUri = "http://localhost:5173";
+
+  useGoogleScript(clientId, redirectUri, handleCredentialResponse);
+
+  const handleCustomSignIn = () => {
+    window.google.accounts.id.prompt();
+  };
+
+  // const login = useGoogleLogin({
+  //   onSuccess: (codeResponse) => console.log(codeResponse),
+  //   onError: (codeResponse) => console.error(codeResponse),
+  //   flow: "auth-code",
+  // });
+  // -----------------------------------------
 
   useEffect(() => {
     const handleResizeWindow = () => setWidth(window.innerWidth);
@@ -36,12 +112,19 @@ const NavBarComp = () => {
     };
   }, []);
 
-  const { isLoading, userProfile, login, logOut } = useContext(UserContext);
+  const login = useGoogleLogin({
+    onSuccess: (codeResponse) => setUser(codeResponse),
+    onError: (error) => console.log("Login Failed:", error),
+  });
+
+  const logOut = () => {
+    googleLogout();
+    setProfile(null);
+  };
 
   const picture = userProfile?.picture;
-  const userVerified = userProfile?.verified_email;
 
-  console.log(userVerified, picture);
+  console.log(picture);
 
   return (
     <div>
@@ -78,21 +161,16 @@ const NavBarComp = () => {
               <Link className="nav-link" to="/photos">
                 PHOTO GALLERY
               </Link>
-              {userVerified && (
-                <>
-                  <Link className="nav-link" to="/reminders">
-                    REMINDERS
-                  </Link>
-
-                  <Link className="nav-link" to="/customers">
-                    CUSTOMERS
-                  </Link>
-                </>
-              )}
-
+              <Link className="nav-link" to="/reminders">
+                REMINDERS
+              </Link>
+              <Link className="nav-link" to="/customers">
+                CUSTOMERS
+              </Link>
               {!userProfile && (
                 <Link
                   className="nav-link"
+                  to="/photos"
                   // onClick={handleCustomSignIn}
                   onClick={login}
                 >
@@ -100,7 +178,7 @@ const NavBarComp = () => {
                 </Link>
               )}
               {userProfile && (
-                <Link className="nav-link" onClick={logOut}>
+                <Link className="nav-link" to="/photos" onClick={logOut}>
                   LOG OUT
                 </Link>
               )}

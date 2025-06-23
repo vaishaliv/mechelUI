@@ -4,9 +4,124 @@
   padding: 0.25rem;
   text-decoration: none;
 }
-.leftMargin2{
+.leftMargin2 {
   margin-left: 2rem;
 }
 .rightMargin2 {
   margin-right: 2rem;
+}
+.custom-datepicker-popper {
+  z-index: 1050; /* Adjust the value as needed */
+}
+.custom-switch .form-check-input:checked {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+.custom-switch .form-check-input {
+  cursor: pointer;
+}
+.form-check-input {
+  background-image: url("data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%27-4 -4 8 8%27><circle r=%273%27 fill=%27%23666%27/></svg>") !important;
+}
+.form-check-input:checked {
+  background-color: #666 !important;
+  border-color: #6668 !important;
+  background-image: url("data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%27-4 -4 8 8%27><circle r=%273%27 fill=%27%23fff%27/></svg>") !important;
+}
+
+.form-check-input:focus {
+  border-color: #6668 !important;
+  outline: 0;
+  box-shadow: none !important;
+}
+.round-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; /* Makes the button round */
+  border: none;
+  background-color: lightgray; /* Dark background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.round-button:hover {
+  transform: scale(1.1); /* Slight zoom effect on hover */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+}
+
+.round-button:active {
+  transform: scale(0.95); /* Slight shrink effect on click */
+}
+.w-80 .modal-content {
+  max-width: 80%;
+  width: 80%;
+  background-color: #333; /* background color */
+  color: #f0f8ff; /* Text Light blue  */
+}
+.w-90 .modal-dialog {
+  max-width: 90%;
+  width: 90%;
+  background-color: #333; /* background color */
+  color: #f0f8ff; /* Text Light blue  */
+}
+.w-40 .modal-dialog {
+  max-width: 40%;
+  width: 40%;
+  background-color: #333; /* background color */
+  color: #f0f8ff; /* Text Light blue  */
+}
+/* .custom-modal .modal-content {
+  background-color: #333; 
+  color: #f0f8ff; 
+} */
+
+.custom-modal .modal-content {
+  background-color: #333; /* background color */
+  color: #f0f8ff; /* Text Light blue  */
+  /* background-color: #f0f8ff; Light blue background */
+}
+
+.custom-modal .modal-dialog {
+  max-width: 80%; /* Increase modal width */
+  width: 80%; /* Optional: Adjust width for responsiveness */
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  display: block !important;
+  opacity: 1 !important;
+}
+
+.btn-no-hover:hover {
+  background-color: inherit !important; /* Keeps the original background color */
+  color: inherit !important; /* Keeps the original text color */
+  border-color: inherit !important; /* Keeps the original border color */
+  text-decoration: none !important; /* Removes underline or other hover effects */
+}
+
+.selected-screen {
+  border: "2px solid white";
+  border-radius: "50%";
+  padding: "10px";
+}
+#custom-tooltip {
+  background-color: #ffcc00 !important; /* Custom background color */
+  color: #000 !important; /* Custom text color */
+  border: 1px solid #000; /* Optional border */
+}
+.phone-input:hover {
+  border: none !important; /* Removes border on hover */
+  outline: none !important;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
 }

@@ -1,0 +1,54 @@
+calibration_end_date
+: 
+"Thu Jun 12 2025"
+calibration_start_date
+: 
+"Thu Jun 12 2025"
+contract_no
+: 
+"C001"
+current_stamping_date
+: 
+"Thu Jun 12 2025"
+edited_by
+: 
+""
+edited_on
+: 
+"June 12, 2025"
+edited_on_row
+: 
+Thu Jun 12 2025 03:58:38 GMT-0400 (Eastern Daylight Time) {}
+future_visit
+: 
+false
+half_yearly_visit
+: 
+false
+id_num
+: 
+"IDN022"
+make
+: 
+"Make two"
+model
+: 
+"Model 22"
+monthly_visit
+: 
+false
+quarterly_visit
+: 
+false
+sold_to_party
+: 
+"party 111"
+stamping_expenses
+: 
+"3000"
+undefined
+: 
+undefined
+yearly_visit
+: 
+false
