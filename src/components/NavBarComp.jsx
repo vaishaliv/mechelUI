@@ -41,6 +41,8 @@ const NavBarComp = () => {
   const picture = userProfile?.picture;
   const userVerified = userProfile?.verified_email;
 
+  // console.log(userProfile)
+
   console.log(userVerified, picture);
 
   return (
@@ -51,22 +53,25 @@ const NavBarComp = () => {
       //fixed-top"
       >
         <Container>
-          <Navbar.Brand className="mx-3" href="/">
-            <img
-              src={logo}
-              alt="logo"
-              style={{
-                height: "3.5rem",
-              }}
-            />
-          </Navbar.Brand>
+          <Link to="/">
+            <Navbar.Brand className="mx-3">
+              <img
+                src={logo}
+                alt="logo"
+                style={{
+                  height: "3.5rem",
+                }}
+              />
+            </Navbar.Brand>
+          </Link>
+
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Link className="nav-link " to="/home">
                 HOME
               </Link>
-              <Link className="nav-link" to="/about" href="/about">
+              <Link className="nav-link" to="/about">
                 ABOUT US
               </Link>
               <Link className="nav-link" to="/contact">
@@ -80,9 +85,9 @@ const NavBarComp = () => {
               </Link>
               {userVerified && (
                 <>
-                  <Link className="nav-link" to="/reminders">
+                  {/* <Link className="nav-link" to="/reminders">
                     REMINDERS
-                  </Link>
+                  </Link> */}
 
                   <Link className="nav-link" to="/customers">
                     CUSTOMERS

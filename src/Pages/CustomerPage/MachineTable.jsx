@@ -210,13 +210,13 @@ const MachineTable = ({ machineDetailsData }) => {
         />
       )}
       <Table striped bordered hover>
-        <thead>
+        <thead className="">
           <tr>
             <th>
               <GrActions />
             </th>
             <th>Party</th>
-            <th>Modal</th>
+            <th>Model</th>
             <th>Machine Number</th>
             <th>Sale Date</th>
             <th>Warranty Period</th>

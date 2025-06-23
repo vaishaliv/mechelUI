@@ -32,7 +32,10 @@ export const UserProvider = ({ children }) => {
           setLoading(false);
         });
     }
-    return () => setLoading(false);
+    return () => {
+      setLoading(false);
+      logOut();
+    };
   }, [user]);
 
   const login = useGoogleLogin({
@@ -45,7 +48,7 @@ export const UserProvider = ({ children }) => {
     setProfile(null);
   };
 
-  const handleUserChange = (user) => {
+  const handleUserChange = () => {
     setUser(user);
   };
 

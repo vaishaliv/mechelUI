@@ -332,7 +332,7 @@ const CustomerList = () => {
           }
         />
       )}
-      <Container style={{ color: "aliceblue" }}>
+      <Container className="w-100" style={{ color: "aliceblue" }}>
         <>
           <CustomerHeader
             setAddNewFlag={setAddNewFlag}
