@@ -12,7 +12,7 @@ export const UserProvider = ({ children }) => {
   const CLIENT_KEY = import.meta.env.VITE_CLIENT_ID;
   useEffect(() => {
     setLoading(true);
-    if (user) {
+    if (user && user.access_token) {
       axios
         .get(
           `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,

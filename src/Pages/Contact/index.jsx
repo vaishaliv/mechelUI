@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import {
   Alert,
   Button,
@@ -15,6 +15,7 @@ import Contacts from "./Contacts";
 import CustomEmail from "../../components/common/CustomEmail";
 import CountdownTimer from "./CountdownTimer";
 import DatePickerComp from "../../components/common/DatePickerComp";
+import UserContext from "../../Contexts/UserContext";
 
 const PageData = [
   {
@@ -45,6 +46,9 @@ const Contact = () => {
   const phoneRef = useRef(null);
   const emailRef = useRef(null);
   const msgRef = useRef(null);
+
+  const { userProfile } = useContext(UserContext);
+  const userVerified = userProfile?.verified_email;
 
   useEffect(() => {
     nameRef.current?.focus();
@@ -129,45 +133,10 @@ const Contact = () => {
     CustomEmail({ name, phone, email, msg, createdDate });
     // localStorage.setItem("Users",[{id:1,name,email,msg}])
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     // llllllllllllllllllllllllllllllll1
     const data = localStorage.getItem("Users");
     const loginUser = JSON.parse(data);
     // lllllllllllllllllllllllllllllllll
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     const newItem = {
       // id: display1 && display1.length,
@@ -301,10 +270,14 @@ const Contact = () => {
             <BottomCardInfo />
           </Col>
         </Row>
-        <hr/>
-        <Row>
-          <Contacts />
-        </Row>
+        {userVerified && (
+          <>
+            <hr />
+            <Row>
+              <Contacts />
+            </Row>
+          </>
+        )}
       </Container>
 
       <Map />
