@@ -212,14 +212,14 @@ const MachineTable = ({ machineDetailsData }) => {
       <Table striped bordered hover>
         <thead className="">
           <tr>
-            <th>
+            <th className="w-50">
               <GrActions />
             </th>
             <th>Party</th>
             <th>Model</th>
-            <th>Machine Number</th>
+            <th>Machine No</th>
             <th>Sale Date</th>
-            <th>Warranty Period</th>
+            <th>Warranty</th>
             <th>Stamping Date</th>
             <th>Fees</th>
             <th>Expenses</th>

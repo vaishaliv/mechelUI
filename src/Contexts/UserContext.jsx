@@ -24,7 +24,7 @@ export const UserProvider = ({ children }) => {
           }
         )
         .then((res) => {
-          localStorage.setItem("USER-PROFILE", JSON.stringify(res.data)); // Save data
+          // localStorage.setItem("USER-PROFILE", JSON.stringify(res.data)); // Save data
           setProfile(res.data);
         })
         .catch((err) => console.log(err))
@@ -44,6 +44,7 @@ export const UserProvider = ({ children }) => {
   });
 
   const logOut = () => {
+    // localStorage.removeItem("USER-PROFILE");
     googleLogout();
     setProfile(null);
   };
