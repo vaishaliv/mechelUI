@@ -5,6 +5,7 @@ import {
   Col,
   Form,
   InputGroup,
+  OverlayTrigger,
   Row,
   Table,
 } from "react-bootstrap";
@@ -16,6 +17,7 @@ import { IoTimer } from "react-icons/io5";
 import { CustomerModal } from "./CustomerModal";
 import { toISOString } from "../../utils/common";
 import NewCountdownTimer from "./NewCountdownTimer";
+import RenderTooltip from "../../components/common/RenderToolTipComp";
 
 const CalibrationTable = ({ calibrationDetailsData }) => {
   const {
@@ -230,25 +232,37 @@ const CalibrationTable = ({ calibrationDetailsData }) => {
                   <tr key={calibration.id}>
                     {/* ---- */}
                     <td>
-                      <Button
-                        variant="light"
-                        onClick={() => {
-                          setEditedCalibration(calibration);
-                          setEditCalibrationFlag((prev) => !prev);
-                        }}
+                      <OverlayTrigger
+                        placement="bottom"
+                        delay={{ show: 250, hide: 400 }}
+                        overlay={<RenderTooltip text="Edit calibration" />}
                       >
-                        <BiEditAlt />
-                      </Button>
-                      <Button
-                        className=" cursor-pointer"
-                        variant="light"
-                        onClick={() => {
-                          setDeletedCalibration(calibration);
-                          setDeletedCalibrationFlag((prev) => !prev);
-                        }}
+                        <Button
+                          variant="light"
+                          onClick={() => {
+                            setEditedCalibration(calibration);
+                            setEditCalibrationFlag((prev) => !prev);
+                          }}
+                        >
+                          <BiEditAlt />
+                        </Button>
+                      </OverlayTrigger>
+                      <OverlayTrigger
+                        placement="bottom"
+                        delay={{ show: 250, hide: 400 }}
+                        overlay={<RenderTooltip text="Delete calibration" />}
                       >
-                        <MdDelete />
-                      </Button>
+                        <Button
+                          className=" cursor-pointer"
+                          variant="light"
+                          onClick={() => {
+                            setDeletedCalibration(calibration);
+                            setDeletedCalibrationFlag((prev) => !prev);
+                          }}
+                        >
+                          <MdDelete />
+                        </Button>
+                      </OverlayTrigger>
                     </td>
 
                     <td>{calibration.sold_to_party}</td>
@@ -261,24 +275,35 @@ const CalibrationTable = ({ calibrationDetailsData }) => {
                     <td>{calibration.calibration_end_date?.toDateString()}</td>
 
                     <td>
-                      <Button
-                        variant="light"
-                        onClick={() => {
-                          handleTimerClick(calibration);
-                        }}
+                      <OverlayTrigger
+                        placement="bottom"
+                        delay={{ show: 250, hide: 400 }}
+                        overlay={<RenderTooltip text="Open reminder" />}
                       >
-                        <IoTimer size={15} />
-                      </Button>
-
-                      <Button
-                        variant="light"
-                        onClick={() => {
-                          setSelectedCalibration(calibration);
-                          setCalibrationFlag((prev) => !prev);
-                        }}
+                        <Button
+                          variant="light"
+                          onClick={() => {
+                            handleTimerClick(calibration);
+                          }}
+                        >
+                          <IoTimer size={15} />
+                        </Button>
+                      </OverlayTrigger>
+                      <OverlayTrigger
+                        placement="bottom"
+                        delay={{ show: 250, hide: 400 }}
+                        overlay={<RenderTooltip text="Calibration details" />}
                       >
-                        ...
-                      </Button>
+                        <Button
+                          variant="light"
+                          onClick={() => {
+                            setSelectedCalibration(calibration);
+                            setCalibrationFlag((prev) => !prev);
+                          }}
+                        >
+                          ...
+                        </Button>
+                      </OverlayTrigger>
                     </td>
                   </tr>
                   {calibrationFlag &&

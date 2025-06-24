@@ -30,6 +30,7 @@ import {
 import { LiaFirstdraft } from "react-icons/lia";
 import AddInitialBody from "./AddInitialBody";
 import AddInitialFooter from "./AddInitialFooter";
+import RenderTooltip from "../../../components/common/RenderToolTipComp";
 
 const AddNewCustomer = ({ modalShow, handleClose }) => {
   const [submitMachine, setSubmitMachine] = useState(true);
@@ -99,11 +100,11 @@ const AddNewCustomer = ({ modalShow, handleClose }) => {
     },
   ];
 
-  const RenderTooltip = (props) => (
-    <Tooltip id="button-tooltip" {...props}>
-      {props.text}
-    </Tooltip>
-  );
+  // const RenderTooltip = (props) => (
+  //   <Tooltip id="button-tooltip" {...props}>
+  //     {props.text}
+  //   </Tooltip>
+  // );
 
   return (
     <Container className="" style={{ color: "aliceblue" }}>

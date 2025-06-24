@@ -7,6 +7,7 @@ import {
   Form,
   InputGroup,
   Modal,
+  OverlayTrigger,
   Row,
   Table,
 } from "react-bootstrap";
@@ -20,6 +21,7 @@ import { FcViewDetails } from "react-icons/fc";
 import { CustomerModal } from "./CustomerModal";
 import NewCountdownTimer from "./NewCountdownTimer";
 import CustomerContext from "../../Contexts/CustomerContext";
+import RenderTooltip from "../../components/common/RenderToolTipComp";
 
 const MachineTable = ({ machineDetailsData }) => {
   const {
@@ -230,25 +232,40 @@ const MachineTable = ({ machineDetailsData }) => {
                 <>
                   <tr key={machine.id}>
                     <td>
-                      <Button
-                        variant="light"
-                        onClick={() => {
-                          setEditedMachine(machine);
-                          setEditMachineFlag((prev) => !prev);
-                        }}
+                      <OverlayTrigger
+                        placement="bottom"
+                        delay={{ show: 250, hide: 400 }}
+                        overlay={<RenderTooltip text="Edit selected machine" />}
                       >
-                        <BiEditAlt />
-                      </Button>
-                      <Button
-                        className=" cursor-pointer"
-                        variant="light"
-                        onClick={() => {
-                          setDeletedMachine(machine);
-                          setDeletedMachineFlag((prev) => !prev);
-                        }}
+                        <Button
+                          variant="light"
+                          onClick={() => {
+                            setEditedMachine(machine);
+                            setEditMachineFlag((prev) => !prev);
+                          }}
+                        >
+                          <BiEditAlt />
+                        </Button>
+                      </OverlayTrigger>
+
+                      <OverlayTrigger
+                        placement="bottom"
+                        delay={{ show: 250, hide: 400 }}
+                        overlay={
+                          <RenderTooltip text="Delete selected machine" />
+                        }
                       >
-                        <MdDelete />
-                      </Button>
+                        <Button
+                          className=" cursor-pointer"
+                          variant="light"
+                          onClick={() => {
+                            setDeletedMachine(machine);
+                            setDeletedMachineFlag((prev) => !prev);
+                          }}
+                        >
+                          <MdDelete />
+                        </Button>
+                      </OverlayTrigger>
                     </td>
                     <td>{machine.sold_to_party}</td>
                     <td>{machine.model}</td>
@@ -257,23 +274,35 @@ const MachineTable = ({ machineDetailsData }) => {
                     <td>{machine?.current_stamping_date?.toDateString()}</td>
 
                     <td>
-                      <Button
-                        variant="light"
-                        onClick={() => {
-                          handleTimerClick(machine);
-                        }}
+                      <OverlayTrigger
+                        placement="bottom"
+                        delay={{ show: 250, hide: 400 }}
+                        overlay={<RenderTooltip text="Open reminders" />}
                       >
-                        <IoTimer size={15} />
-                      </Button>
-                      <Button
-                        variant="light"
-                        onClick={() => {
-                          setSelectedMachine(machine);
-                          setMachineFlag((prev) => !prev);
-                        }}
+                        <Button
+                          variant="light"
+                          onClick={() => {
+                            handleTimerClick(machine);
+                          }}
+                        >
+                          <IoTimer size={15} />
+                        </Button>
+                      </OverlayTrigger>
+                      <OverlayTrigger
+                        placement="bottom"
+                        delay={{ show: 250, hide: 400 }}
+                        overlay={<RenderTooltip text="Service details" />}
                       >
-                        <FcViewDetails size={15} />
-                      </Button>
+                        <Button
+                          variant="light"
+                          onClick={() => {
+                            setSelectedMachine(machine);
+                            setMachineFlag((prev) => !prev);
+                          }}
+                        >
+                          <FcViewDetails size={15} />
+                        </Button>
+                      </OverlayTrigger>
                     </td>
                   </tr>
                   {machineFlag && machine.id === selectedMachine.id && (

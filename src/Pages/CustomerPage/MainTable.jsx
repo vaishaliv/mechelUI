@@ -1,5 +1,12 @@
 import React, { useContext } from "react";
-import { Accordion, Button, Card, InputGroup, Table } from "react-bootstrap";
+import {
+  Accordion,
+  Button,
+  Card,
+  InputGroup,
+  OverlayTrigger,
+  Table,
+} from "react-bootstrap";
 import { BiEdit, BiEditAlt, BiExport } from "react-icons/bi";
 import {
   MdCompassCalibration,
@@ -19,6 +26,7 @@ import PhoneCompOriginal from "./MainInitial/PhoneCompOriginal";
 import { PiMicrosoftExcelLogoThin } from "react-icons/pi";
 import { customerJsonToExcel } from "./CustomerJsonToExcel";
 import CustomerContext from "../../Contexts/CustomerContext";
+import RenderTooltip from "../../components/common/RenderToolTipComp";
 
 const MainTable = ({}) => {
   const {
@@ -58,95 +66,132 @@ const MainTable = ({}) => {
 
             return (
               <>
-                <tr
-                  key={customer.id}
-                  onClick={(e) => {
-                    setSelectedCustomer(customer);
-                    setToggleRow((prev) => !prev);
-                  }}
-                  style={{ cursor: "pointer" }}
+                <OverlayTrigger
+                  placement="bottom"
+                  delay={{ show: 250, hide: 400 }}
+                  overlay={<RenderTooltip text="CLick the row to toggle" />}
                 >
-                  <td>
-                    <Button
-                      variant="outline-success"
-                      onClick={() => customerJsonToExcel(customer)}
-                    >
-                      <PiMicrosoftExcelLogoThin size={20} />
-                    </Button>
-                    <Button
-                      variant="outline-info"
-                      className="mx-2"
-                      onClick={(e) => {
-                        e.stopPropagation(); // Stops the event from propagating
-                        setSelectedCustomer(customer);
-                        setEditCustomerFlag(true);
-                      }}
-                    >
-                      <BiEdit size={20} />
-                    </Button>
-                    <Button
-                      className=""
-                      variant="outline-danger "
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setDeleteCustomerFlag(true);
-                        setDeletedCustomer(customer);
-                      }}
-                    >
-                      <MdDeleteForever size={22} />
-                    </Button>
-                  </td>
-                  <td>{customer.name}</td>
-                  <td>{customer.email}</td>
-                  <td>{customer.phone}</td>
-                  <td style={{ width: "4%" }}>
-                    <motion.div
-                      style={{ cursor: "pointer", outline: 0 }}
-                      initial={{ scale: 0.8, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      whileTap={{ scale: 0.9 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      {toggleMainRow && selectedCustomer.id === customer.id ? (
+                  <tr
+                    key={customer.id}
+                    onClick={(e) => {
+                      setSelectedCustomer(customer);
+                      setToggleRow((prev) => !prev);
+                    }}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <td>
+                      <OverlayTrigger
+                        placement="bottom"
+                        delay={{ show: 250, hide: 400 }}
+                        overlay={<RenderTooltip text="Export to Excel" />}
+                      >
                         <Button
-                          variant="light"
-                          className="round-button text-info"
-                          onClick={() => {
-                            // setSelectedCustomer(null);
-                            setToggleRow((prev) => !prev);
-                          }}
+                          variant="outline-success"
+                          onClick={() => customerJsonToExcel(customer)}
                         >
-                          <motion.div
-                            key="moon1"
-                            initial={{ rotate: 90, opacity: 0 }}
-                            animate={{ rotate: 0, opacity: 1 }}
-                            exit={{ rotate: -90, opacity: 0 }}
-                          >
-                            <BsThreeDots />
-                          </motion.div>
+                          <PiMicrosoftExcelLogoThin size={20} />
                         </Button>
-                      ) : (
+                      </OverlayTrigger>
+
+                      <OverlayTrigger
+                        placement="bottom"
+                        delay={{ show: 250, hide: 400 }}
+                        overlay={<RenderTooltip text="Edit Customer Record" />}
+                      >
                         <Button
-                          variant="light"
-                          className="round-button text-info"
-                          onClick={() => {
+                          variant="outline-info"
+                          className="mx-2"
+                          onClick={(e) => {
+                            e.stopPropagation(); // Stops the event from propagating
                             setSelectedCustomer(customer);
-                            setToggleRow((prev) => !prev);
+                            setEditCustomerFlag(true);
                           }}
                         >
-                          <motion.div
-                            key="sun1"
-                            initial={{ rotate: -90, opacity: 0 }}
-                            animate={{ rotate: 0, opacity: 1 }}
-                            exit={{ rotate: 90, opacity: 0 }}
-                          >
-                            <BsThreeDotsVertical />
-                          </motion.div>
+                          <BiEdit size={20} />
                         </Button>
-                      )}
-                    </motion.div>
-                  </td>
-                </tr>
+                      </OverlayTrigger>
+
+                      <OverlayTrigger
+                        placement="bottom"
+                        delay={{ show: 250, hide: 400 }}
+                        overlay={
+                          <RenderTooltip text="Delete Customer Record" />
+                        }
+                      >
+                        <Button
+                          className=""
+                          variant="outline-danger "
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setDeleteCustomerFlag(true);
+                            setDeletedCustomer(customer);
+                          }}
+                        >
+                          <MdDeleteForever size={22} />
+                        </Button>
+                      </OverlayTrigger>
+                    </td>
+                    <td>{customer.name}</td>
+                    <td>{customer.email}</td>
+                    <td>{customer.phone}</td>
+                    <td style={{ width: "4%" }}>
+                      <OverlayTrigger
+                        placement="bottom"
+                        delay={{ show: 250, hide: 400 }}
+                        overlay={
+                          <RenderTooltip text="CLick the row to toggle" />
+                        }
+                      >
+                        <motion.div
+                          style={{ cursor: "pointer", outline: 0 }}
+                          initial={{ scale: 0.8, opacity: 0 }}
+                          animate={{ scale: 1, opacity: 1 }}
+                          whileTap={{ scale: 0.9 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          {toggleMainRow &&
+                          selectedCustomer.id === customer.id ? (
+                            <Button
+                              variant="light"
+                              className="round-button text-info"
+                              onClick={() => {
+                                // setSelectedCustomer(null);
+                                setToggleRow((prev) => !prev);
+                              }}
+                            >
+                              <motion.div
+                                key="moon1"
+                                initial={{ rotate: 90, opacity: 0 }}
+                                animate={{ rotate: 0, opacity: 1 }}
+                                exit={{ rotate: -90, opacity: 0 }}
+                              >
+                                <BsThreeDots />
+                              </motion.div>
+                            </Button>
+                          ) : (
+                            <Button
+                              variant="light"
+                              className="round-button text-info"
+                              onClick={() => {
+                                setSelectedCustomer(customer);
+                                setToggleRow((prev) => !prev);
+                              }}
+                            >
+                              <motion.div
+                                key="sun1"
+                                initial={{ rotate: -90, opacity: 0 }}
+                                animate={{ rotate: 0, opacity: 1 }}
+                                exit={{ rotate: 90, opacity: 0 }}
+                              >
+                                <BsThreeDotsVertical />
+                              </motion.div>
+                            </Button>
+                          )}
+                        </motion.div>
+                      </OverlayTrigger>
+                    </td>
+                  </tr>
+                </OverlayTrigger>
                 {toggleMainRow && selectedCustomer.id === customer.id && (
                   <tr>
                     <td colSpan={5}>

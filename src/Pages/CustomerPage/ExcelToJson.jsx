@@ -1,8 +1,9 @@
 import React, { useRef, useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, OverlayTrigger } from "react-bootstrap";
 import { PiMicrosoftExcelLogoThin } from "react-icons/pi";
 import * as XLSX from "xlsx";
 import { generateId } from "../../utils/common";
+import RenderTooltip from "../../components/common/RenderToolTipComp";
 
 const ExcelToJson = ({ pageData, setPageData }) => {
   const [jsonData, setJsonData] = useState(null);
@@ -116,19 +117,24 @@ const ExcelToJson = ({ pageData, setPageData }) => {
     reader.readAsArrayBuffer(file);
   };
 
-
   return (
     <>
-      <Button
-        variant="success"
-        htmlFor="fileInput"
-        onClick={() => {
-          inputRef.current?.click();
-        }}
+      <OverlayTrigger
+        placement="bottom"
+        delay={{ show: 250, hide: 400 }}
+        overlay={<RenderTooltip text="New customer from excel" />}
       >
-        <PiMicrosoftExcelLogoThin size={20} className="mx-1" />
-        Load from Excel
-      </Button>
+        <Button
+          variant="success"
+          htmlFor="fileInput"
+          onClick={() => {
+            inputRef.current?.click();
+          }}
+        >
+          <PiMicrosoftExcelLogoThin size={20} className="mx-1" />
+          Load from Excel
+        </Button>
+      </OverlayTrigger>
       <input
         id="fileInput"
         ref={inputRef}

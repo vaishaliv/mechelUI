@@ -5,6 +5,7 @@ import {
   Col,
   Form,
   InputGroup,
+  OverlayTrigger,
   Row,
   Table,
 } from "react-bootstrap";
@@ -16,6 +17,7 @@ import { IoTimer } from "react-icons/io5";
 import { CustomerModal } from "./CustomerModal";
 import { toISOString } from "../../utils/common";
 import NewCountdownTimer from "./NewCountdownTimer";
+import RenderTooltip from "../../components/common/RenderToolTipComp";
 
 const ServiceTable = ({ serviceDetailsData }) => {
   const {
@@ -80,41 +82,41 @@ const ServiceTable = ({ serviceDetailsData }) => {
       return 1;
     };
     const maxNum = getMaxNum();
-     const getDateSet = (stampingDate, maxNum) => {
-    console.log("is date ?????", stampingDate);
+    const getDateSet = (stampingDate, maxNum) => {
+      console.log("is date ?????", stampingDate);
 
-    let copyDate = stampingDate;
-    let customDate = stampingDate;
-    // let customDate = new Date(stampingDate);
-    let arr = [];
-    let obj = { last_date: "", name: "", date: "" };
+      let copyDate = stampingDate;
+      let customDate = stampingDate;
+      // let customDate = new Date(stampingDate);
+      let arr = [];
+      let obj = { last_date: "", name: "", date: "" };
 
-    let incrementCount = 12;
-    if (maxNum === 1) incrementCount = 12;
-    if (maxNum === 2) incrementCount = 6;
-    if (maxNum === 3) incrementCount = 3;
-    if (maxNum === 12) incrementCount = 1;
+      let incrementCount = 12;
+      if (maxNum === 1) incrementCount = 12;
+      if (maxNum === 2) incrementCount = 6;
+      if (maxNum === 3) incrementCount = 3;
+      if (maxNum === 12) incrementCount = 1;
 
-    for (let i = 1; i <= maxNum; i++) {
-      const d = toISOString(
-        customDate.setMonth(customDate.getMonth() + incrementCount)
-      );
-      const someDate = new Date(d).toDateString();
-      const d_name = new Date(d).toLocaleDateString("default", {
-        month: "short",
-      });
+      for (let i = 1; i <= maxNum; i++) {
+        const d = toISOString(
+          customDate.setMonth(customDate.getMonth() + incrementCount)
+        );
+        const someDate = new Date(d).toDateString();
+        const d_name = new Date(d).toLocaleDateString("default", {
+          month: "short",
+        });
 
-      // console.log("???????????????????????????????", someDate, d, copyDate);
-      obj = {
-        last_date: copyDate,
-        name: d_name,
-        date: d,
-        someDate,
-      };
-      arr.push(obj);
-    }
-    return arr;
-  };
+        // console.log("???????????????????????????????", someDate, d, copyDate);
+        obj = {
+          last_date: copyDate,
+          name: d_name,
+          date: d,
+          someDate,
+        };
+        arr.push(obj);
+      }
+      return arr;
+    };
     const myArr = getDateSet(service.current_stamping_date, maxNum);
     console.log("service tABLE .....", myArr);
     setTimerArray(myArr);
@@ -228,26 +230,38 @@ const ServiceTable = ({ serviceDetailsData }) => {
                 <>
                   <tr key={service.id}>
                     <td>
-                      <Button
-                        variant="light"
-                        className="p-1 cursor-pointer"
-                        onClick={() => {
-                          setEditedService(service);
-                          setEditServiceFlag((prev) => !prev);
-                        }}
+                      <OverlayTrigger
+                        placement="bottom"
+                        delay={{ show: 250, hide: 400 }}
+                        overlay={<RenderTooltip text="Edit service" />}
                       >
-                        <BiEditAlt />
-                      </Button>
-                      <Button
-                        className="p-1 mx-1 cursor-pointer"
-                        variant="light"
-                        onClick={() => {
-                          setDeletedService(service);
-                          setDeletedServiceFlag((prev) => !prev);
-                        }}
+                        <Button
+                          variant="light"
+                          className="p-1 cursor-pointer"
+                          onClick={() => {
+                            setEditedService(service);
+                            setEditServiceFlag((prev) => !prev);
+                          }}
+                        >
+                          <BiEditAlt />
+                        </Button>
+                      </OverlayTrigger>
+                      <OverlayTrigger
+                        placement="bottom"
+                        delay={{ show: 250, hide: 400 }}
+                        overlay={<RenderTooltip text="Delete service" />}
                       >
-                        <MdDelete />
-                      </Button>
+                        <Button
+                          className="p-1 mx-1 cursor-pointer"
+                          variant="light"
+                          onClick={() => {
+                            setDeletedService(service);
+                            setDeletedServiceFlag((prev) => !prev);
+                          }}
+                        >
+                          <MdDelete />
+                        </Button>
+                      </OverlayTrigger>
                     </td>
 
                     <td>{service.sold_to_party}</td>
@@ -258,23 +272,35 @@ const ServiceTable = ({ serviceDetailsData }) => {
                     <td>{service.amc_end_date?.toDateString()}</td>
 
                     <td>
-                      <Button
-                        variant="light"
-                        onClick={() => {
-                          handleTimerClick(service);
-                        }}
+                      <OverlayTrigger
+                        placement="bottom"
+                        delay={{ show: 250, hide: 400 }}
+                        overlay={<RenderTooltip text="Open Reminders" />}
                       >
-                        <IoTimer size={15} />
-                      </Button>
-                      <Button
-                        variant="light"
-                        onClick={() => {
-                          setSelectedService(service);
-                          setServiceFlag((prev) => !prev);
-                        }}
+                        <Button
+                          variant="light"
+                          onClick={() => {
+                            handleTimerClick(service);
+                          }}
+                        >
+                          <IoTimer size={15} />
+                        </Button>
+                      </OverlayTrigger>
+                      <OverlayTrigger
+                        placement="bottom"
+                        delay={{ show: 250, hide: 400 }}
+                        overlay={<RenderTooltip text="Service details" />}
                       >
-                        ...
-                      </Button>
+                        <Button
+                          variant="light"
+                          onClick={() => {
+                            setSelectedService(service);
+                            setServiceFlag((prev) => !prev);
+                          }}
+                        >
+                          ...
+                        </Button>
+                      </OverlayTrigger>
                     </td>
                   </tr>
                   {serviceFlag && service.id === selectedService.id && (
