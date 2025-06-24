@@ -9,7 +9,9 @@ import { CustomerProvider } from "../../Contexts/CustomerContext";
 
 const CustomerPage = () => {
   return (
-    <Container className="w-100" style={{ height: "100vh" }}>
+    <Container className="w-100" 
+    // style={{ height: "100vh" }}
+    >
       <CommonHeader title="" topMargin="6rem" innerMargin="2rem" />
       <CustomerProvider>
         <CustomerList />

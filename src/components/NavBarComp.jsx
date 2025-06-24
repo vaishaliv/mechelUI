@@ -100,8 +100,8 @@ const NavBarComp = () => {
                   className="nav-link"
                   // onClick={handleCustomSignIn}
                   onClick={login}
-                >LOG IN
-                
+                >
+                  LOG IN
                   {/* {isLoading ? <Spinner size={15} /> : "LOG IN"} */}
                 </Link>
               )}

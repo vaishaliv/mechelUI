@@ -186,7 +186,7 @@ const MachineTable = ({ machineDetailsData }) => {
     );
   };
 
-  console.log("MACHINE tABLE .....", newMachine);
+  // console.log("MACHINE tABLE .....", newMachine);
   const getVisitOptions = () => {
     return "Yearly Visit";
   };
@@ -212,18 +212,14 @@ const MachineTable = ({ machineDetailsData }) => {
       <Table striped bordered hover>
         <thead className="">
           <tr>
-            <th className="w-50">
+            <th className="">
               <GrActions />
             </th>
             <th>Party</th>
             <th>Model</th>
             <th>Machine No</th>
             <th>Sale Date</th>
-            <th>Warranty</th>
             <th>Stamping Date</th>
-            <th>Fees</th>
-            <th>Expenses</th>
-            <th>Future Visit</th>
             <th></th>
           </tr>
         </thead>
@@ -255,20 +251,11 @@ const MachineTable = ({ machineDetailsData }) => {
                       </Button>
                     </td>
                     <td>{machine.sold_to_party}</td>
-                    <td>{machine.modal}</td>
+                    <td>{machine.model}</td>
                     <td>{machine.machine_id}</td>
                     <td>{machine.sale_date?.toDateString()}</td>
-                    <td>{machine.warranty_period}</td>
                     <td>{machine?.current_stamping_date?.toDateString()}</td>
-                    <td>{machine.stamping_fees}</td>
-                    <td>{machine.stamping_expenses}</td>
-                    <td>
-                      <input
-                        type="checkbox"
-                        checked={machine.future_visit}
-                        readOnly={true}
-                      />
-                    </td>
+
                     <td>
                       <Button
                         variant="light"
@@ -291,8 +278,52 @@ const MachineTable = ({ machineDetailsData }) => {
                   </tr>
                   {machineFlag && machine.id === selectedMachine.id && (
                     <tr>
-                      <td colSpan={11}>
+                      <td colSpan={9}>
                         <Row>
+                          <Col>
+                            <Card>
+                              <Row>
+                                <Col>
+                                  <Card className="m-2 mx-2 mt-5">
+                                    <Card.Header>Stamping Fees</Card.Header>
+                                    <Card.Body>
+                                      {machine.stamping_fees}
+                                    </Card.Body>
+                                  </Card>
+                                </Col>
+                                <Col>
+                                  <Card className="m-2 mx-2 mt-5">
+                                    <Card.Header>Stamping Expenses</Card.Header>
+                                    <Card.Body>
+                                      {machine.stamping_expenses}
+                                    </Card.Body>
+                                  </Card>
+                                </Col>
+                              </Row>
+                              <Row>
+                                <Col>
+                                  <Card className="m-2 mx-2 mt-3">
+                                    <Card.Header>Warranty Period</Card.Header>
+                                    <Card.Body>
+                                      {machine.warranty_period}
+                                    </Card.Body>
+                                  </Card>
+                                </Col>
+                                <Col>
+                                  <Card className="m-2 mx-2 mt-3 mb-3">
+                                    <Card.Header>Future Visit?</Card.Header>
+                                    <Card.Body>
+                                      <input
+                                        type="checkbox"
+                                        checked={machine.future_visit}
+                                        readOnly={true}
+                                      />
+                                    </Card.Body>
+                                  </Card>
+                                </Col>
+                              </Row>
+                            </Card>
+                          </Col>
                           <Col>
                             <Card className="p-4 w-100">
                               <Card.Header>Allowed Visits</Card.Header>
